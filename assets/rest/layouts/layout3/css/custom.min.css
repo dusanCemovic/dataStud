@@ -1,0 +1,33 @@
+.portlet-body > form {
+	display:inline-block;
+	width: 100%;
+}
+
+.portlet-body > form input[type="submit"] {
+	display:inline-block;
+	float:left;
+}
+table form {
+	float: right;
+}
+
+
+.portlet .actions {
+	padding-right: 300px !important;
+}
+
+
+.main-statistic .portlet .actions {
+	padding-right: 0 !important;
+}
+
+
+
+.metricco-admin-faq .portlet-body > form {
+	width: 100%;
+	vertical-align: middle;
+}
+
+div.dt-button-collection > a.dt-button.active {
+	background-color: #32c5d2 !important;
+}

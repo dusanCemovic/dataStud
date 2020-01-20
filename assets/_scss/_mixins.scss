@@ -1,0 +1,97 @@
+// partials
+@import 'variables';
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// clearfix
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// typography
+@mixin text-inherit() {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-transform: inherit;
+}
+
+@mixin text-align($position...) {
+    text-align: $position;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// content media query mixins
+@mixin phone-portrait {
+    @media (max-width: 480px) {
+        @content;
+    }
+}
+
+// content media query mixins
+@mixin phone-landscape {
+    @media (max-width: 680px) {
+        @content;
+    }
+}
+
+@mixin tablet-portrait {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin tablet-landscape {
+    @media (max-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin laptop {
+    @media (max-width: 1366px) {
+        @content;
+    }
+}
+
+@mixin larger-laptop {
+    @media (max-width: 1440px) {
+        @content;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// placeholder text color
+@mixin placeholder-color($color...) {
+    &:-moz-placeholder {
+        color: $color;
+    }
+    // firefox 18-
+    &::-moz-placeholder {
+        color: $color; // firefox
+        opacity: 1;
+    }
+    // see https://github.com/twbs/bootstrap/pull/11526
+    &:-ms-input-placeholder {
+        color: $color;
+    }
+    // internet explorer 10+
+    &::-webkit-input-placeholder {
+        color: $color;
+    }
+    // safari and chrome
+}

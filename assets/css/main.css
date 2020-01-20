@@ -1,0 +1,199 @@
+.select2 {
+  width: 100% !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  /* Firefox */
+}
+
+.select2-container {
+  z-index: 20000;
+}
+
+.datepicker.dropdown-menu {
+  z-index: 20001;
+}
+
+.modal-backdrop {
+  z-index: 20002;
+}
+
+.modal {
+  z-index: 20003;
+}
+
+.modal-open .select2-container--open {
+  z-index: 20003;
+}
+
+.swal2-shown .swal2-container {
+  z-index: 20004;
+}
+
+.metricco-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.1s ease-out, visibility 0.1s ease-out;
+}
+
+body.metricco-loading .metricco-overlay {
+  visibility: visible;
+  opacity: 1;
+  z-index: 20004;
+}
+
+.metricco-separator {
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.metricco-clearfix {
+  clear: both;
+}
+
+.portlet-body > form {
+  display: inline-block;
+  width: 100%;
+}
+
+.portlet-body > form input[type="submit"] {
+  display: inline-block;
+  float: left;
+}
+
+table form {
+  float: right;
+}
+
+table tbody tr.odd {
+  background-color: #eee !important;
+}
+
+.portlet .actions {
+  padding-right: 350px !important;
+}
+
+.main-statistic .portlet .actions {
+  padding-right: 0 !important;
+}
+
+.metricco-admin-faq .portlet-body > form {
+  width: 100%;
+  vertical-align: middle;
+}
+
+div.dt-button-collection > a.dt-button.active {
+  background-color: #32c5d2 !important;
+}
+
+/* editing excel tabele - start */
+.metricco-th-span {
+  margin-right: 10px;
+}
+
+.metricco-save-column {
+  display: none;
+}
+
+.metricco-allow-editing-column .metricco-edit-column {
+  display: none;
+}
+
+.metricco-allow-editing-column .metricco-save-column {
+  display: inline;
+}
+
+.metricco-control-active.btn.blue {
+  background-color: #32c5d2 !important;
+  border-color: #32c5d2 !important;
+  color: #fff !important;
+}
+
+.metricco-control-active.btn.dark {
+  background-color: #2f353b !important;
+  border-color: #2f353b !important;
+  color: #fff !important;
+}
+
+/* editing excel tabele - end */
+/* dealers chart start */
+.metricco-color-showcase {
+  display: inline-block;
+  vertical-align: middle;
+  height: 20px;
+  width: 20px;
+  margin-left: 15px;
+}
+
+.flot-text ~ .legend > div, .flot-text ~ .legend > table {
+  right: auto !important;
+  left: 50px !important;
+}
+
+#metricco-tooltip {
+  position: absolute;
+  display: none;
+  border: 2px solid #32c5d2;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* dealers chart ned */
+div.date.input-group {
+  position: relative;
+  display: block;
+}
+
+div.date.input-group .datepicker-icon {
+  position: absolute;
+  right: 0;
+  width: auto;
+  z-index: 1;
+}
+
+div.date.input-group input {
+  width: 100%;
+  display: block;
+  background: none;
+  z-index: 2;
+  padding-right: 50px;
+}
+
+div.date.input-group input:not(:disabled) {
+  cursor: pointer;
+}
+
+div.date.input-group .metricco-datepicker-icon-delete {
+  display: none;
+}
+
+.metricco-note {
+  margin-bottom: 60px;
+  max-width: 400px;
+}
+
+.metricco-note .metricco-note-btn {
+  margin-top: 20px;
+}
+
+@media (max-width: 680px) {
+  .portlet > .portlet-title > .actions > .fullscreen {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=../css/main.css.map */

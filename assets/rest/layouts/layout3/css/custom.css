@@ -1,0 +1,17 @@
+/* here you can put your own css to customize and override the theme */
+.portlet-body > form {
+	display:inline-block
+}
+
+.portlet-body > form input[type="submit"] {
+	display:inline-block;
+	float:left;
+}
+
+table form {
+	float: right;
+}
+
+.portlet .actions {
+	padding-right: 300px !important;
+}

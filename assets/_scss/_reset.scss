@@ -1,0 +1,40 @@
+
+.select2 {
+    width: 100% !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.select2-container {
+    z-index: 20000;
+}
+
+.datepicker.dropdown-menu {
+    z-index: 20001;
+}
+
+.modal-backdrop {
+    z-index: 20002;
+}
+
+.modal {
+    z-index: 20003;
+}
+
+.modal-open {
+    .select2-container--open {
+        z-index: 20003;
+    }
+}
+
+.swal2-shown .swal2-container {
+    z-index: 20004;
+}
