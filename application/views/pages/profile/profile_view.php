@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div style="max-width: 200px; margin:auto; display: block" class="">
-                                <img style="max-width: 100%" src="/avatar.jpg">
+                                <img style="max-width: 100%" src="/assets/img/avatar.jpg">
                             </div>
                         </div>
                         <div class="col-md-8">

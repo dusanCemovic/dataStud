@@ -55,5 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['registration'] = 'account/controller_account/profile_registration_form';
 $route['profile']      = 'profile/controller_profile/profile_view';
-$route['result']      = 'tool/controller_tool/result';
+$route['result']       = 'tool/controller_tool/result';
 $route['ideal-combo']  = 'tool/controller_tool/ideal_combo';
+$route['statistics']   = 'statistics/controller_statistics/statistics';
