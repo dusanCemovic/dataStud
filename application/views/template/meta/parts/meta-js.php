@@ -37,6 +37,9 @@
 <!-- Next script is only here for header on mobile find @handleMainMenu -->
 <script src="/assets/rest/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
 <script src="/assets/js/modules.js" type="text/javascript"></script>
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/assets/rest/pages/scripts/components-select2.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
 
 
 <?php if(isset($additional_js)) { echo $additional_js;} ?>

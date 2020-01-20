@@ -6,7 +6,6 @@
             <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
                 <!-- BEGIN CONTENT BODY -->
-	            <?php if ( dts_is_logged( $this ) ) { ?>
                 <!-- BEGIN PAGE HEAD-->
                 <div class="page-head">
                     <div class="container">
@@ -19,7 +18,6 @@
                     </div>
                 </div>
                 <!-- END PAGE HEAD-->
-	            <?php } ?>
                 <!-- BEGIN PAGE CONTENT BODY -->
                 <div class="page-content">
                     <div class="container">

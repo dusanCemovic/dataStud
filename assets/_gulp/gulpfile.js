@@ -26,7 +26,8 @@ gulp.task('lint', function () {
 // Concatenate
 gulp.task('all', function () {
     return gulp.src([
-        '../_js/modules/global/main.js'
+        '../_js/modules/global/main.js',
+        '../_js/modules/global/common.js',
     ]).pipe(concat('modules.js'))
         .pipe(gulp.dest('../js'));
 });

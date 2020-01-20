@@ -52,3 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller']   = 'controller_home/home';
 $route['404_override']         = 'controller_home/404';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['registration'] = 'account/controller_account/profile_registration_form';
+$route['profile']      = 'profile/controller_profile/profile_view';
+$route['result']      = 'tool/controller_tool/result';
+$route['ideal-combo']  = 'tool/controller_tool/ideal_combo';
