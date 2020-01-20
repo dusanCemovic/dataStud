@@ -16,15 +16,14 @@
 <script src="/assets/rest/global/plugins/bootstrap-sweetalert/js/sweetalert2.min.js" type="text/javascript"></script>
 
 <?php if(isset($enable_charts) && $enable_charts == true) { ?>
-	<script src="/assets/rest/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
-	<script src="/assets/rest/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
-	<script src="/assets/rest/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
-	<script src="/assets/rest/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
+    <script src="/assets/rest/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
+    <script src="/assets/rest/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
+    <script src="/assets/rest/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
+    <script src="/assets/rest/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
 
-	<script src="/assets/rest/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
-	<script src="/assets/rest/global/plugins/flot/jquery.flot.stack.min.js" type="text/javascript"></script>
+    <script src="/assets/rest/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
+    <script src="/assets/rest/global/plugins/flot/jquery.flot.stack.min.js" type="text/javascript"></script>
 
-	<!--        <script src="/assets/global/plugins/highcharts/js/highcharts.js" type="text/javascript"></script>-->
 <?php } ?>
 
 
@@ -37,9 +36,6 @@
 <!-- Next script is only here for header on mobile find @handleMainMenu -->
 <script src="/assets/rest/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
 <script src="/assets/js/modules.js" type="text/javascript"></script>
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="/assets/rest/pages/scripts/components-select2.js" type="text/javascript"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
 
 
 <?php if(isset($additional_js)) { echo $additional_js;} ?>

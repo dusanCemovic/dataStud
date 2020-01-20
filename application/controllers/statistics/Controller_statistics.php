@@ -25,6 +25,8 @@ class Controller_statistics extends Dts_Controller {
 		// set title
 		$this->set_title( "Statistics" );
 
+		$this->additional_info('enable_charts', true);
+
 		$this->add_page( 'statistics' );
 		$this->load_default_view();
 	}

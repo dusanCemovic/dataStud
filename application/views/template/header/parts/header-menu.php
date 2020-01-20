@@ -37,15 +37,15 @@
                                 </a>
                             </li>
                             <li aria-haspopup="true" class=" ">
-                                <a href="/profile-create.php" class="nav-link  ">
+                                <a href="/registration" class="nav-link  ">
                                     <i class="icon-bulb"></i> Create new Profile </a>
                             </li>
                             <li aria-haspopup="true" class=" ">
-                                <a href="/profile-view.php" class="nav-link  ">
+                                <a href="/profile" class="nav-link  ">
                                     <i class="icon-bulb"></i> Profile </a>
                             </li>
                             <li aria-haspopup="true" class=" ">
-                                <a href="/statistics.php" class="nav-link  ">
+                                <a href="/statistics" class="nav-link  ">
                                     <i class="icon-bulb"></i> Statistics </a>
                             </li>
                         </ul>
