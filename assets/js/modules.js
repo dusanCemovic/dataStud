@@ -61,7 +61,7 @@
     });
 
     dts.window.on('load', function () {
-        dtsSmoothScroll().init();
+        dtsSmoothScroll.init();
     });
 
     dts.window.resize(function () {
@@ -76,21 +76,25 @@
      * Object that represents scroll to anchor
      * @returns {{init: Function}} function that initializes scroll to anchor functionality
      */
-    var dtsSmoothScroll = dts.modules.common.dtsSmoothScroll = function () {
+    var dtsSmoothScroll = {
+        init : function () {
 
-        var headerHeight, anchor, scrollOffset;
+            var $anchor = $('.dts-custom-anchor');
 
-        headerHeight = dts.headerHeight;
-        anchor = $('.dts-custom-anchor');
-        scrollOffset = headerHeight;
 
-        /**
-         * Function that scroll to specific anchor functionality functionality
-         */
-        var dtsAnchorScrollEvent = function (anchor) {
-            anchor.click(function (e) {
+            if ($anchor.length) {
+                $anchor.each(function () {
+                    dtsSmoothScroll.dtsAnchorScrollEvent($(this));
+                });
+            }
+
+        },
+        dtsAnchorScrollEvent: function ($anchor) {
+            $anchor.click(function (e) {
 
                 e.preventDefault();
+
+                var scrollOffset = dts.headerHeight;
 
                 var anchorLocation = $(this).attr('href');
                 var target = $(anchorLocation);
@@ -103,22 +107,16 @@
                 }
 
             });
-        };
-
-        return {
-            init: function () {
-                if (anchor.length) {
-                    anchor.each(function () {
-                        dtsAnchorScrollEvent($(this));
-                    });
-                }
-            }
-        };
+        }
     };
 
-    var ComponentsDateTimePickers = function () {
-
-        var handleDatePickers = function () {
+    var ComponentsDateTimePickers = {
+        //main function to initiate the module
+        init: function () {
+            ComponentsDateTimePickers.handleDatePickers();
+            ComponentsDateTimePickers.handleTimePickers();
+        },
+        handleDatePickers : function () {
 
             if (jQuery().datepicker) {
                 $('.date-picker').datepicker({
@@ -136,9 +134,8 @@
             $(document).scroll(function () {
                 $('#form_modal2 .date-picker').datepicker('place'); //#modal is the id of the modal
             });
-        }
-
-        var handleTimePickers = function () {
+        },
+        handleTimePickers : function () {
 
             if (jQuery().timepicker) {
                 $('.timepicker-default').timepicker({
@@ -174,19 +171,18 @@
             }
         }
 
-        return {
-            //main function to initiate the module
-            init: function () {
-                handleDatePickers();
-                handleTimePickers();
-            }
-        };
+    };
 
-    }();
+    var ComponentsSelect2 = {
+        //main function to initiate the module
+        init: function () {
+            ComponentsSelect2.handleDemo();
 
-    var ComponentsSelect2 = function () {
-
-        var handleDemo = function () {
+            dts.body.on('dts_trigger_default_function_select2', function () {
+                ComponentsSelect2.handleDemo();
+            });
+        },
+        handleDemo : function () {
 
             // Set the "bootstrap" theme as the default theme for all Select2
             // widgets.
@@ -303,277 +299,281 @@
                 $("#select2-multiple-input-lg, #select2-single-input-lg").next(".select2-container--bootstrap").addClass("input-lg");
                 $(this).removeClass("btn-primary btn-outline").prop("disabled", true);
             });
-        };
-
-        return {
-            //main function to initiate the module
-            init: function () {
-                handleDemo();
-
-                dts.body.on('dts_trigger_default_function_select2', function () {
-                    handleDemo();
-                });
-            }
-        };
-
-    }();
-
-})(jQuery);
-
-var ChartsAmcharts = function () {
-
-    var initChartSample1 = function () {
-        var chart = AmCharts.makeChart("chart_1", {
-            "type": "serial",
-            "theme": "light",
-            "pathToImages": App.getGlobalPluginsPath() + "amcharts/amcharts/images/",
-            "autoMargins": false,
-            "marginLeft": 30,
-            "marginRight": 8,
-            "marginTop": 10,
-            "marginBottom": 26,
-
-            "fontFamily": 'Open Sans',
-            "color": '#888',
-
-            "dataProvider": [{
-                "year": 2013,
-                "salary": 750,
-            }, {
-                "year": 2014,
-                "salary": 860,
-            }, {
-                "year": 2015,
-                "salary": 830,
-            }, {
-                "year": 2016,
-                "salary": 870,
-            }, {
-                "year": 2017,
-                "salary": 1000,
-            }, {
-                "year": 2018,
-                "salary": 920,
-            }, {
-                "year": 2019,
-                "salary": 970,
-                "dashLengthLine": 5
-            }, {
-                "year": 2020,
-                "salary": 1020,
-                "dashLengthColumn": 5,
-                "alpha": 0.2,
-                "additional": "(projection)"
-            }, {
-                "year": 2021,
-                "salary": 1040,
-                "dashLengthColumn": 5,
-                "alpha": 0.2,
-                "additional": "(projection)"
-            }, {
-                "year": 2022,
-                "salary": 1100,
-                "dashLengthColumn": 5,
-                "alpha": 0.2,
-                "additional": "(projection)"
-            }, {
-                "year": 2023,
-                "salary": 1150,
-                "dashLengthColumn": 5,
-                "alpha": 0.2,
-                "additional": "(projection)"
-            }, {
-                "year": 2024,
-                "salary": 1220,
-                "dashLengthColumn": 5,
-                "alpha": 0.2,
-                "additional": "(projection)"
-            }],
-            "valueAxes": [{
-                "axisAlpha": 0,
-                "position": "left"
-            }],
-            "startDuration": 1,
-            "graphs": [{
-                "alphaField": "alpha",
-                "balloonText": "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>",
-                "dashLengthField": "dashLengthColumn",
-                "fillAlphas": 1,
-                "title": "Salary (in EURO)",
-                "type": "column",
-                "valueField": "salary"
-            }],
-            "categoryField": "year",
-            "categoryAxis": {
-                "gridPosition": "start",
-                "axisAlpha": 0,
-                "tickLength": 0
-            }
-        });
-
-        $('#chart_1').closest('.portlet').find('.fullscreen').click(function () {
-            chart.invalidateSize();
-        });
-    }
-
-    var initChartSample1x = function () {
-        var chart = AmCharts.makeChart("chart_1x", {
-            "type": "serial",
-            "theme": "light",
-            "pathToImages": App.getGlobalPluginsPath() + "amcharts/amcharts/images/",
-            "autoMargins": false,
-            "marginLeft": 30,
-            "marginRight": 8,
-            "marginTop": 10,
-            "marginBottom": 26,
-
-            "fontFamily": 'Open Sans',
-            "color": '#888',
-
-            "dataProvider": [{
-                "year": 2013,
-                "design": 90,
-            }, {
-                "year": 2014,
-                "design": 100,
-            }, {
-                "year": 2015,
-                "design": 120,
-            }, {
-                "year": 2016,
-                "design": 140,
-            }, {
-                "year": 2017,
-                "design": 150,
-            }, {
-                "year": 2018,
-                "design": 210,
-            }, {
-                "year": 2019,
-                "design": 215,
-                "dashLengthLine": 5
-            }, {
-                "year": 2020,
-                "design": 240,
-                "dashLengthColumn": 5,
-                "alpha": 0.2,
-                "additional": "(projection)"
-            }, {
-                "year": 2021,
-                "design": 245,
-                "dashLengthColumn": 5,
-                "alpha": 0.2,
-                "additional": "(projection)"
-            }, {
-                "year": 2022,
-                "design": 260,
-                "dashLengthColumn": 5,
-                "alpha": 0.2,
-                "additional": "(projection)"
-            }, {
-                "year": 2023,
-                "design": 270,
-                "dashLengthColumn": 5,
-                "alpha": 0.2,
-                "additional": "(projection)"
-            }, {
-                "year": 2024,
-                "design": 280,
-                "dashLengthColumn": 5,
-                "alpha": 0.2,
-                "additional": "(projection)"
-            }],
-            "valueAxes": [{
-                "axisAlpha": 0,
-                "position": "left"
-            }],
-            "startDuration": 1,
-            "graphs": [{
-                "alphaField": "alpha",
-                "balloonText": "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>",
-                "dashLengthField": "dashLengthColumn",
-                "fillAlphas": 1,
-                "title": "Design",
-                "type": "column",
-                "valueField": "design"
-            }],
-            "categoryField": "year",
-            "categoryAxis": {
-                "gridPosition": "start",
-                "axisAlpha": 0,
-                "tickLength": 0
-            }
-        });
-
-        $('#chart_1').closest('.portlet').find('.fullscreen').click(function () {
-            chart.invalidateSize();
-        });
-    }
-
-    var initChartSample7 = function () {
-        var chart = AmCharts.makeChart("chart_7", {
-            "type": "pie",
-            "theme": "light",
-
-            "fontFamily": 'Open Sans',
-
-            "color": '#888',
-
-            "dataProvider": [{
-                "country": "Design",
-                "value": 45
-            }, {
-                "country": "Others",
-                "value": 565
-            }],
-            "valueField": "value",
-            "titleField": "country",
-            "outlineAlpha": 0.4,
-            "depth3D": 15,
-            "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
-            "angle": 30,
-            "exportConfig": {
-                menuItems: [{
-                    icon: '/lib/3/images/export.png',
-                    format: 'png'
-                }]
-            }
-        });
-
-        jQuery('.chart_7_chart_input').off().on('input change', function () {
-            var property = jQuery(this).data('property');
-            var target = chart;
-            var value = Number(this.value);
-            chart.startDuration = 0;
-
-            if (property == 'innerRadius') {
-                value += "%";
-            }
-
-            target[property] = value;
-            chart.validateNow();
-        });
-
-        $('#chart_7').closest('.portlet').find('.fullscreen').click(function () {
-            chart.invalidateSize();
-        });
-    }
-
-
-    return {
-        //main function to initiate the module
-
-        init: function () {
-
-            initChartSample1();
-            initChartSample1x();
-            initChartSample7();
         }
 
     };
 
-}();
+})(jQuery);
 
-jQuery(document).ready(function () {
-    ChartsAmcharts.init();
-});
+// charts.js
+(function ($) {
+    "use strict";
+
+    dts.window.ready(function () {
+
+    });
+
+    dts.window.on('load', function () {
+        ChartsAmcharts.init();
+    });
+
+    dts.window.resize(function () {
+
+    });
+
+    dts.window.scroll(function () {
+
+    });
+
+    var ChartsAmcharts = {
+        init: function () {
+
+            if (typeof AmCharts !== 'undefined') {
+
+                ChartsAmcharts.initChartSample1();
+                ChartsAmcharts.initChartSample1x();
+                ChartsAmcharts.initChartSample7();
+
+            }
+
+        },
+        initChartSample1: function () {
+            var chart = AmCharts.makeChart("chart_1", {
+                "type": "serial",
+                "theme": "light",
+                "pathToImages": App.getGlobalPluginsPath() + "amcharts/amcharts/images/",
+                "autoMargins": false,
+                "marginLeft": 30,
+                "marginRight": 8,
+                "marginTop": 10,
+                "marginBottom": 26,
+
+                "fontFamily": 'Open Sans',
+                "color": '#888',
+
+                "dataProvider": [{
+                    "year": 2013,
+                    "salary": 750,
+                }, {
+                    "year": 2014,
+                    "salary": 860,
+                }, {
+                    "year": 2015,
+                    "salary": 830,
+                }, {
+                    "year": 2016,
+                    "salary": 870,
+                }, {
+                    "year": 2017,
+                    "salary": 1000,
+                }, {
+                    "year": 2018,
+                    "salary": 920,
+                }, {
+                    "year": 2019,
+                    "salary": 970,
+                    "dashLengthLine": 5
+                }, {
+                    "year": 2020,
+                    "salary": 1020,
+                    "dashLengthColumn": 5,
+                    "alpha": 0.2,
+                    "additional": "(projection)"
+                }, {
+                    "year": 2021,
+                    "salary": 1040,
+                    "dashLengthColumn": 5,
+                    "alpha": 0.2,
+                    "additional": "(projection)"
+                }, {
+                    "year": 2022,
+                    "salary": 1100,
+                    "dashLengthColumn": 5,
+                    "alpha": 0.2,
+                    "additional": "(projection)"
+                }, {
+                    "year": 2023,
+                    "salary": 1150,
+                    "dashLengthColumn": 5,
+                    "alpha": 0.2,
+                    "additional": "(projection)"
+                }, {
+                    "year": 2024,
+                    "salary": 1220,
+                    "dashLengthColumn": 5,
+                    "alpha": 0.2,
+                    "additional": "(projection)"
+                }],
+                "valueAxes": [{
+                    "axisAlpha": 0,
+                    "position": "left"
+                }],
+                "startDuration": 1,
+                "graphs": [{
+                    "alphaField": "alpha",
+                    "balloonText": "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>",
+                    "dashLengthField": "dashLengthColumn",
+                    "fillAlphas": 1,
+                    "title": "Salary (in EURO)",
+                    "type": "column",
+                    "valueField": "salary"
+                }],
+                "categoryField": "year",
+                "categoryAxis": {
+                    "gridPosition": "start",
+                    "axisAlpha": 0,
+                    "tickLength": 0
+                }
+            });
+
+            $('#chart_1').closest('.portlet').find('.fullscreen').click(function () {
+                    chart.invalidateSize();
+                }
+            )
+        },
+        initChartSample1x: function () {
+            var chart = AmCharts.makeChart("chart_1x", {
+                "type": "serial",
+                "theme": "light",
+                "pathToImages": App.getGlobalPluginsPath() + "amcharts/amcharts/images/",
+                "autoMargins": false,
+                "marginLeft": 30,
+                "marginRight": 8,
+                "marginTop": 10,
+                "marginBottom": 26,
+
+                "fontFamily": 'Open Sans',
+                "color": '#888',
+
+                "dataProvider": [{
+                    "year": 2013,
+                    "design": 90,
+                }, {
+                    "year": 2014,
+                    "design": 100,
+                }, {
+                    "year": 2015,
+                    "design": 120,
+                }, {
+                    "year": 2016,
+                    "design": 140,
+                }, {
+                    "year": 2017,
+                    "design": 150,
+                }, {
+                    "year": 2018,
+                    "design": 210,
+                }, {
+                    "year": 2019,
+                    "design": 215,
+                    "dashLengthLine": 5
+                }, {
+                    "year": 2020,
+                    "design": 240,
+                    "dashLengthColumn": 5,
+                    "alpha": 0.2,
+                    "additional": "(projection)"
+                }, {
+                    "year": 2021,
+                    "design": 245,
+                    "dashLengthColumn": 5,
+                    "alpha": 0.2,
+                    "additional": "(projection)"
+                }, {
+                    "year": 2022,
+                    "design": 260,
+                    "dashLengthColumn": 5,
+                    "alpha": 0.2,
+                    "additional": "(projection)"
+                }, {
+                    "year": 2023,
+                    "design": 270,
+                    "dashLengthColumn": 5,
+                    "alpha": 0.2,
+                    "additional": "(projection)"
+                }, {
+                    "year": 2024,
+                    "design": 280,
+                    "dashLengthColumn": 5,
+                    "alpha": 0.2,
+                    "additional": "(projection)"
+                }],
+                "valueAxes": [{
+                    "axisAlpha": 0,
+                    "position": "left"
+                }],
+                "startDuration": 1,
+                "graphs": [{
+                    "alphaField": "alpha",
+                    "balloonText": "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>",
+                    "dashLengthField": "dashLengthColumn",
+                    "fillAlphas": 1,
+                    "title": "Design",
+                    "type": "column",
+                    "valueField": "design"
+                }],
+                "categoryField": "year",
+                "categoryAxis": {
+                    "gridPosition": "start",
+                    "axisAlpha": 0,
+                    "tickLength": 0
+                }
+            });
+
+            $('#chart_1').closest('.portlet').find('.fullscreen').click(function () {
+                chart.invalidateSize();
+            });
+        },
+
+        initChartSample7: function () {
+            var chart = AmCharts.makeChart("chart_7", {
+                "type": "pie",
+                "theme": "light",
+
+                "fontFamily": 'Open Sans',
+
+                "color": '#888',
+
+                "dataProvider": [{
+                    "country": "Design",
+                    "value": 45
+                }, {
+                    "country": "Others",
+                    "value": 565
+                }],
+                "valueField": "value",
+                "titleField": "country",
+                "outlineAlpha": 0.4,
+                "depth3D": 15,
+                "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+                "angle": 30,
+                "exportConfig": {
+                    menuItems: [{
+                        icon: '/lib/3/images/export.png',
+                        format: 'png'
+                    }]
+                }
+            });
+
+            jQuery('.chart_7_chart_input').off().on('input change', function () {
+                var property = jQuery(this).data('property');
+                var target = chart;
+                var value = Number(this.value);
+                chart.startDuration = 0;
+
+                if (property == 'innerRadius') {
+                    value += "%";
+                }
+
+                target[property] = value;
+                chart.validateNow();
+            });
+
+            $('#chart_7').closest('.portlet').find('.fullscreen').click(function () {
+                chart.invalidateSize();
+            });
+        }
+
+    };
+
+})(jQuery);

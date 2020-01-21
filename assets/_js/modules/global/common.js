@@ -10,7 +10,7 @@
     });
 
     dts.window.on('load', function () {
-        dtsSmoothScroll().init();
+        dtsSmoothScroll.init();
     });
 
     dts.window.resize(function () {
@@ -25,21 +25,25 @@
      * Object that represents scroll to anchor
      * @returns {{init: Function}} function that initializes scroll to anchor functionality
      */
-    var dtsSmoothScroll = dts.modules.common.dtsSmoothScroll = function () {
+    var dtsSmoothScroll = {
+        init : function () {
 
-        var headerHeight, anchor, scrollOffset;
+            var $anchor = $('.dts-custom-anchor');
 
-        headerHeight = dts.headerHeight;
-        anchor = $('.dts-custom-anchor');
-        scrollOffset = headerHeight;
 
-        /**
-         * Function that scroll to specific anchor functionality functionality
-         */
-        var dtsAnchorScrollEvent = function (anchor) {
-            anchor.click(function (e) {
+            if ($anchor.length) {
+                $anchor.each(function () {
+                    dtsSmoothScroll.dtsAnchorScrollEvent($(this));
+                });
+            }
+
+        },
+        dtsAnchorScrollEvent: function ($anchor) {
+            $anchor.click(function (e) {
 
                 e.preventDefault();
+
+                var scrollOffset = dts.headerHeight;
 
                 var anchorLocation = $(this).attr('href');
                 var target = $(anchorLocation);
@@ -52,22 +56,16 @@
                 }
 
             });
-        };
-
-        return {
-            init: function () {
-                if (anchor.length) {
-                    anchor.each(function () {
-                        dtsAnchorScrollEvent($(this));
-                    });
-                }
-            }
-        };
+        }
     };
 
-    var ComponentsDateTimePickers = function () {
-
-        var handleDatePickers = function () {
+    var ComponentsDateTimePickers = {
+        //main function to initiate the module
+        init: function () {
+            ComponentsDateTimePickers.handleDatePickers();
+            ComponentsDateTimePickers.handleTimePickers();
+        },
+        handleDatePickers : function () {
 
             if (jQuery().datepicker) {
                 $('.date-picker').datepicker({
@@ -85,9 +83,8 @@
             $(document).scroll(function () {
                 $('#form_modal2 .date-picker').datepicker('place'); //#modal is the id of the modal
             });
-        }
-
-        var handleTimePickers = function () {
+        },
+        handleTimePickers : function () {
 
             if (jQuery().timepicker) {
                 $('.timepicker-default').timepicker({
@@ -123,19 +120,18 @@
             }
         }
 
-        return {
-            //main function to initiate the module
-            init: function () {
-                handleDatePickers();
-                handleTimePickers();
-            }
-        };
+    };
 
-    }();
+    var ComponentsSelect2 = {
+        //main function to initiate the module
+        init: function () {
+            ComponentsSelect2.handleDemo();
 
-    var ComponentsSelect2 = function () {
-
-        var handleDemo = function () {
+            dts.body.on('dts_trigger_default_function_select2', function () {
+                ComponentsSelect2.handleDemo();
+            });
+        },
+        handleDemo : function () {
 
             // Set the "bootstrap" theme as the default theme for all Select2
             // widgets.
@@ -252,19 +248,8 @@
                 $("#select2-multiple-input-lg, #select2-single-input-lg").next(".select2-container--bootstrap").addClass("input-lg");
                 $(this).removeClass("btn-primary btn-outline").prop("disabled", true);
             });
-        };
+        }
 
-        return {
-            //main function to initiate the module
-            init: function () {
-                handleDemo();
-
-                dts.body.on('dts_trigger_default_function_select2', function () {
-                    handleDemo();
-                });
-            }
-        };
-
-    }();
+    };
 
 })(jQuery);
